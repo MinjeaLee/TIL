@@ -8,6 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-    ?��?��?��?��?�� <?php echo $_GET['name']; ?>?��
+    안녕하세요<?php echo $_GET['name']; ?>님
+    당신은<?php echo $_GET['address']; ?>에 있습니다.
 </body>
 </html>
