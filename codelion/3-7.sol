@@ -1,4 +1,5 @@
 // Klaytn IDE uses solidity 0.4.24, 0.5.6 versions.
+//restore github
 pragma solidity >=0.4.24 <=0.5.6;
 
 contract  NFTsimple{

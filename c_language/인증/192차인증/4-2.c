@@ -1,4 +1,5 @@
 #include <stdio.h>
+//restore github
 
 int main(){
     int x[100], i, n, result, count, tmp;

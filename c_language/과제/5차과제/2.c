@@ -1,4 +1,5 @@
 #include <stdio.h>
+//restore github
 
 int SumMultiple(int Start, int End, int X);     // SumMultiple 함수 선언
 

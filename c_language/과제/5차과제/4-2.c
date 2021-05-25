@@ -1,4 +1,5 @@
 #include <stdio.h>
+//restore github
 
 int is_prime_number(int num){       // is_prime_number 함수 정의
     int check = 1;                  // 소수인지 아닌지를 판단할 변수를 1로 선언

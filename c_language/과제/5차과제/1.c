@@ -1,4 +1,5 @@
 #include <stdio.h>
+//restore github
 
 int num_digit(int n){       // num_digit 함수 정의
     int len = 0;            // 결과값 변수 선언

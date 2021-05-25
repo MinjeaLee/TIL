@@ -1,5 +1,5 @@
  #include <stdio.h>
-
+//restore github
 int main(){
     int x[100], y[100], a[100], b[100], c[100], a_c, b_c, n, i, j, tmp;
     int acount = 0, bcount = 0, ccount = 0;

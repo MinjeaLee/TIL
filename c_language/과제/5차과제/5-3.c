@@ -1,4 +1,5 @@
 #include <stdio.h>
+//restore github
 #include <limits.h>         // 최솟값에 int가 가질 수 있는 최솟값으로 저장하게하기 위해 limits.h를 포함시킴
 
 int add_digits(int n){      // add_digit함수 정의

@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+//restore github
 int main(){
     int num, start, i, j, k, tmp;
     scanf("%d %d", &num, &start);

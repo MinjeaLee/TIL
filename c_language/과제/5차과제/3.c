@@ -1,4 +1,5 @@
 #include <stdio.h>
+//restore github
 
 int multiple(int x, int y){         // multiple 함수 정의
     if(x % y == 0){                 // x 가 y의 배수이면
