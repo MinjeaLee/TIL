@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--restore github -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,6 +8,6 @@
     <title>Document</title>
 </head>
 <body>
-    ì•ˆë…•í•˜ì„¸ìš” <?php echo $_GET['name']; ?>ë‹˜
+    ?•ˆ?…•?•˜?„¸?š” <?php echo $_GET['name']; ?>?‹˜
 </body>
 </html>

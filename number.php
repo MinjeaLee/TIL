@@ -1,6 +1,7 @@
-
+<!--restore github -->
 <html>
 <body>
+
     <?php
         echo 1;
     ?>
