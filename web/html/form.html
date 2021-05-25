@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <title>amorindeum</title>
+        <meta charset="utf-8">
+
+    </head>
+    <body>
+        <form action="https://localhost/order.php">
+            <p>TEXT : <input type="text" placeholder="입력" name="text"></p>
+            <p>PASSWORD : <input type="password" name="password"></p>
+            <p>TEXT AREA : <textarea name="" id="" cols="50" rows="10" placeholder=""></textarea></p>
+            <p>
+                <h1>색상</h1>
+                <select name="color1" id="">
+                    <option value="r">빨</option>
+                    <option value="o">주</option>
+                    <option value="y">노</option>
+                </select>
+            </p>
+            <p>
+                <h1>다중선택</h1>
+                <select name="color2" multiple>
+                    <option value="r">빨</option>
+                    <option value="o">주</option>
+                    <option value="y">노</option>
+                </select>
+            </p>
+            <p>
+                <h1>단일 선택</h1>
+                빨<input type="radio" name="color3" value="red">
+                주<input type="radio" name="color3" value="orange">
+                노<input type="radio" name="color3" value="yellow">
+            </p>
+            <p>
+                <h1>다중 선택</h1>
+                빨<input type="checkbox" name="color4" value="r">
+                주<input type="checkbox" name="color4" value="o" checked>
+                노<input type="checkbox" name="color4" value="y">
+            </p>
+
+            <input type="submit" value="안녕">
+        </form>
+    </body>
+</html>

@@ -1,0 +1,93 @@
+1.
+    블록체인 --> 월드 컴퓨터
+
+    블록체인 데이터 누구나 볼 수 있음, 누구나 사용가능(스마트 컨트랙트경우 
+    스마트 컨트랙트 코드안의 특정 동작을 정의된 동작내에 할 수 있음)
+    
+    블록체인의 경우 개발시 무조건 클레이튼 스코프에 올라감.
+    누구나 스마트 컨트렉트 볼 수 있음.
+    input data -> 코드.
+
+2.
+    블록체인 주소
+    1) 개인키 기반 주소
+        -> 주소와 잔고로 구성
+        -> 클레이트 월렛 서비스에서 만듦.
+        -> 블록체인 월렛 주소 -> 계좌번호
+    2) 스마트 컨트렉트 기반 주소
+        -> 주소와 잔고, 코드로 구성
+        -> 거래의 일련번호..? -> transcation hash
+        -> 개인키 기반 주소와 달리 코드를 보관 가능
+
+3.
+    transcation
+    1) 블록체인에서의 모든 거래
+    2) 코드에서 돈을 보낼 수 있다.!!
+        -> 그냥 코드안에서 클레이를 주고 받을 수 있다. -> 중요한 점 중 하나
+    3) 코드를 실행하는데 돈이 든다.!!
+        -> 모두가 사용가능 하므로 모두가 사용하게 되면 블록체인이 오염된다 -> 이를 방지하기 위한 메커니즘.
+
+4.
+    수수료 = Gas * Gas Price
+
+
+
+
+
+
+contract NFTMarket {
+    mapping(uint256 => address) public seller;
+    mapping(uint256 => address[]) public SellHistory;  
+    mapping(uint256 => address[]) public BuyHistory;
+    mapping(uint256 => address[]) public temp;
+    mapping(uint256 => address[]) public TokenHistory;
+    
+
+    function buyNFT(uint256 tokenId, address NFT) public payable returns (bool) {
+        address payable receiver = address(uint160(seller[tokenId]));
+        receiver.transfer(10**16);
+        NFTSimple(NFT).safeTransferFrom(address(this),msg.sender,tokenId,"0x00");
+        return true;
+    }
+
+    function WriteSellHistory(uint256 sell_token, address sell_owner) public returns (address[] memory){
+        sell_owner = seller[sell_token];
+        SellHistory[sell_token].push(sell_owner);
+        temp[sell_token].push(sell_owner);
+        
+        return SellHistory[sell_token];
+    }
+
+    function WriteBuyHistory(uint256 buy_token, address buy_owner) public returns (address[] memory){
+        buy_owner = msg.sender;
+        BuyHistory[buy_token].push(buy_owner);
+        temp[buy_token].push(buy_owner);
+
+        return BuyHistory[buy_token];
+    }
+
+    function ViewTokenHistory(uint256 tokenId) public returns (address[] memory){
+        for(uint256 i = 0; i < temp[tokenId].length - 1; i++){
+            for(uint256 j = i + 1; j < temp[tokenId].length; j++){
+                if(temp[tokenId][i] == temp[tokenId][j]){
+                    temp[tokenId][i] = 0x0000000000000000000000000000000000000000;
+                }
+            }
+        }
+        for(uint256 i = 0; i < temp[tokenId].length; i++){
+            if(temp[tokenId][i] != 0x0000000000000000000000000000000000000000){
+                TokenHistory[tokenId].push(temp[tokenId][i]);
+            }
+        }
+
+        return TokenHistory[tokenId];
+    }
+
+    function onKIP17Received(address operator,address from,uint256 tokenId,bytes memory data) public returns (bytes4) {
+        seller[tokenId] = from;
+        return bytes4(keccak256("onKIP17Received(address,address,uint256,bytes)"));
+    }
+}
+    
+    
+
