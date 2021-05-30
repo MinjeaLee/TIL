@@ -1,75 +1,55 @@
 import logo from './logo.svg';
-import Caver from 'caver-js';
+import {getBalance, readCount, setCount} from './api/UseCaver';
 import './App.css';
+import React, {useState} from "react";
+import QRcode from "qrcode.react";
+import * as klipAPI from "./api/UseKlip";
 
-const COUNT_CONTRACT_ADDRESS = '0xf461d87d54dc8549196F43831b549F240698901e';
-const ACCESS_KEY_ID = 'KASKQEGA7NQRALPDX9D5RE2K';
-const SECRET_ACCESS_KEY = 'E29Zp2QDITcEp33sDoNUaCQD8e1gMkmbVIlXRnx9';
-const CHAIN_ID = '1001'; // main net -> 8217, test net -> 1001
-const COUNT_ABI = '[ { "constant": false, "inputs": [ { "name": "_count", "type": "uint256" } ], "name": "setCount", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "count", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getBlockNumber", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" } ]';
-// ABI(Application Binary Interface) Áï, »ç¿ë ¼³¸í¼­
-const option = {
-  headers: [
-    {
-      name: "Authorization",
-      value: "Basic " + Buffer.from(ACCESS_KEY_ID + ":" + SECRET_ACCESS_KEY).toString("base64")
-    },
-    {
-      name : "x-chain-id",
-      value : CHAIN_ID
-    }
-  ]
+// ABI(Application Binary Interface) ï¿½ï¿½, ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+function onPressButton(balance) {
+  console.log('hi');
 }
+const onPressButton2 = (_balance, _setBalance) => {
+  _setBalance(_balance);
+};
 
-const caver = new Caver(new Caver.providers.HttpProvider("https://node-api.klaytnapi.com/v1/klaytn", option));
-const CountContract = new caver.contract(JSON.parse(COUNT_ABI), COUNT_CONTRACT_ADDRESS);
-
-const readCount = async () => {
-  const _count = await CountContract.methods.count().call();
-  console.log(_count);
-}
-
-const getBalance = (address) => {
-  return caver.rpc.klay.getBalance(address).then((response) => {
-    const balance = caver.utils.convertFromPeb(caver.utils.hexToNumberString(response));
-    console.log(`balance:${balance}`);
-    return balance;
-  })
-}
-
-const setCount = async (newcount) => {
-  try{
-    const privatekey = '0x6fdc784fc13a996cd88779a7ac896582a111a132f03d8488b8262bc0d79dfe43';
-    const deployer = caver.wallet.keyring.createFromPrivateKet(privatekey);
-    caver.wallet.add(deployer);
-  
-    const receipt = await CountContract.methods.setCount().send({
-      from: deployer.address,// address
-      Gas: "0x4bfd200"
-    });
-    console.log(receipt);
-  }catch(e){
-    console.log(`[ERROR_SET_COUNT]${e}`);
-  }
-}
+const DEFAULT_QR_CODE = "DEFAULT";
 function App() {
-  readCount();
-  getBalance('0x398627ff984396ae5e3f36df4dfd33d05dfb48c6');
+  const [balance, setBalance] = useState('0');
+  const [qrvalue, setQrvalue] = useState(DEFAULT_QR_CODE);
+  // const onPressButton2 = (balance) => {
+  //   setBalance('10');
+  // }
+  // readCount();
+  // getBalance('0x398627ff984396ae5e3f36df4dfd33d05dfb48c6');
+  const onClickgetAddress = () => {
+    klipAPI.getAddress(setQrvalue);
+  };  
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        {/* <img src={logo} className="App-logo" alt="logo" /> */}
+        {/* <button title={"ì¹´ìš´íŠ¸ë³€ê²½"} onClick={() => {setCount(100)}} /> */}
+        {/* <button onClick={() => {onPressButton2('15', setBalance)}}>hi</button> */}
+        <button onClick={() =>{
+          onClickgetAddress();
+        }}>
+          ì£¼ì†Œê°€ì ¸ì˜¤ê¸°
+        </button>
+        <br/>
+        <QRcode value={qrvalue} />
         <p>
-          hi <code>src/App.js</code> and save to reload.
+          {balance}
+          {/* hi <code>src/App.js</code> and save to reload. */}
         </p>
-        <a
+        {/* <a
           className="App-link"
           href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"
         >
           Learn React
-        </a>
+        </a> */}
       </header>
     </div>
   );
