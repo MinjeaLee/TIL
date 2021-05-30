@@ -37,7 +37,21 @@ const getBalance = (address) => {
   })
 }
 
-
+const setCount = async (newcount) => {
+  try{
+    const privatekey = '0x6fdc784fc13a996cd88779a7ac896582a111a132f03d8488b8262bc0d79dfe43';
+    const deployer = caver.wallet.keyring.createFromPrivateKet(privatekey);
+    caver.wallet.add(deployer);
+  
+    const receipt = await CountContract.methods.setCount().send({
+      from: deployer.address,// address
+      Gas: "0x4bfd200"
+    });
+    console.log(receipt);
+  }catch(e){
+    console.log(`[ERROR_SET_COUNT]${e}`);
+  }
+}
 function App() {
   readCount();
   getBalance('0x398627ff984396ae5e3f36df4dfd33d05dfb48c6');
