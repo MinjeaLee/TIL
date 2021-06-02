@@ -1,20 +1,39 @@
 #include <stdio.h>
 
 int main(){
-    char string[20], a;
-    int *p_ch;
+    char ch[20] = {'\0', }, tmp;
+    char *ptr_ch;
+    int count = 0;
 
-    for(p_ch = string; p_ch < string + 20; p_ch++){
-        scanf("%c", p_ch);
-        if(*p_ch == '\n'){
+    ptr_ch = ch;
+
+    for(int i = 0; i < 20; i++){
+        scanf("%c", &tmp);
+        if(tmp == '\n'){
             break;
+        }
+        else{
+            *(ptr_ch + i) = tmp;
         }
     }
     
+    for(int i = 20; i >= 0; i--){
+        if(*(ptr_ch + i) == '#'){
+            count++;
+        }
+    }
+
+    for(int i = 20; i >= 0; i--){
+        if(*(ptr_ch + i) == '#'){
+            count--;
+        }
+        if(count == 0){
+            if(*(ptr_ch + i) != '#'){
+                printf("%c", *(ptr_ch + i));
+            }
+        }
+    }
     
-    printf("%s", *p_ch);
-
-
 
     return 0;
 }
