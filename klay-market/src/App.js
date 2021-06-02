@@ -5,7 +5,7 @@ import React, {useState} from "react";
 import QRcode from "qrcode.react";
 import * as klipAPI from "./api/UseKlip";
 
-// ABI(Application Binary Interface) ��, ��� ������
+// ABI(Application Binary Interface) => like instruction
 function onPressButton(balance) {
   console.log('hi');
 }
@@ -29,12 +29,12 @@ function App() {
     <div className="App">
       <header className="App-header">
         {/* <img src={logo} className="App-logo" alt="logo" /> */}
-        {/* <button title={"카운트변경"} onClick={() => {setCount(100)}} /> */}
+        {/* <button title={""} onClick={() => {setCount(100)}} /> */}
         {/* <button onClick={() => {onPressButton2('15', setBalance)}}>hi</button> */}
         <button onClick={() =>{
           onClickgetAddress();
         }}>
-          주소가져오기
+          주소�??��?���?
         </button>
         <br/>
         <QRcode value={qrvalue} />
