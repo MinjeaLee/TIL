@@ -42,24 +42,16 @@
     <h1><a href="index.php">WEB</a></h1>
     <nav>
         <ol>
-            <!-- <li><a href="index.php?id=html">HTML</a></li>
-            <li><a href="index.php?id=css">CSS</a></li>
-            <li><a href="index.php?id=java">JAVA</a></li> -->
             <?php
                 print_list();
             ?>
         </ol>
     </nav> 
     <a href="create.php">create</a>
-    <h2>
-        <?php 
-            print_title();
-        ?>
-    </h2>
-    <p>
-        <?php
-            print_content();
-        ?>
-    </p>
+    <form action="create_process.php" method="post">
+        <p><input type="text" name="title" placeholder="input title"></p>
+        <p><textarea name="content"  cols="30" rows="10" placeholder="input content"></textarea></p>
+        <p><input type="submit" value="제출"></p>
+    </form>
 </body>
 </html>
