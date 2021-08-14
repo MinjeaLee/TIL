@@ -1,7 +1,6 @@
 <?php
     $conn =  mysqli_connect("localhost", "root", "111111", "web3");
 
-
     $sql_select = "select * from topic";
     $result = mysqli_query($conn, $sql_select);
     $list = '';
@@ -17,6 +16,18 @@
         'title' => "welcome",
         'description' => $welcome_text
     );
+
+    if(isset($_GET['id'])){
+        $filtered_id = mysqli_real_escape_string($conn, $_GET['id']); // security, sql injection attack 
+
+        $sql_show_description = "select * from topic where id = {$filtered_id}"; // sql command
+        $result_description = mysqli_query($conn, $sql_show_description); // sql command apply
+        $description_arr = mysqli_fetch_array($result_description); // result to arry
+        $description = array(
+            'title' => htmlspecialchars($description_arr['title']),
+            'description' =>  htmlspecialchars($description_arr['description'])
+        );
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,11 +45,12 @@
             // var_dump($list);
         ?>
     </ol>
-    <form action="process_create.php" method="POST">
-        <p><input type="text" name="title" placeholder="title"></p>
-        <p><textarea name="description" placeholder="description" cols="30" rows="10"></textarea></p>
-        <p><input type="submit"></p>
+    <form action="process_modify.php" method="post">
+        <input type="hidden" name="id" value="<?php echo $_GET["id"]?>">
+        <p><input type="text" name="title" value="<?php echo $description['title']?>"></p>
+        <p><textarea name="description" cols="30" rows="10"><?php echo $description['description']?></textarea></p>
+        <p><input type="submit" value="submit"></p>
     </form>
-
+    
 </body>
 </html>
