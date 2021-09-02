@@ -1,17 +1,7 @@
 #include <stdio.h>
 
-void stack1(){
-    int x = 10;
-    stack2();
-}
+int main(){
 
-void stack2(){
-    int y = 100;
-}
-
-void main(){
-    stack1();
-
+    printf("hello world");
     return 0;
 }
-

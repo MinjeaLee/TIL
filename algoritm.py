@@ -63,17 +63,23 @@ def GCD(a, b):
     else:
         return GCD(b , a%b)
 
-# gdc
+# gdc(최대 공약수)
 def gcd(a, b):
     if a < b:
         a, b = b, a
     if b == 0:
         return 0
-    while b != 0:
-        n = a % b
-        a = b
-        b = n
-    result = a
+    else:
+        while b != 0:
+            n = a % b
+            a = b
+            b = n
+        result = a
+
+# lcm(최소 공배수)
+def lcm(a, b):
+    result = a * b / gcd(a,b)
+    return result;
         
 
 # 소인수분해
@@ -93,6 +99,4 @@ def Distingusih_of_Prime(num):
         print("Prime")
     div = 0
 
-#reversse
-    
 
