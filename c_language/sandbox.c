@@ -1,23 +1,13 @@
 #include <stdio.h>
 
-void swap(int *x, int *y){
-    int tmp;
-
-    tmp = *x;
-    *x = *y;
-    *y = tmp;
-}
-
 int main(){
-    int a, b;
+    // char a[3] = "123";
+    char str[6];
+    scanf("%s", str);
 
-    scanf("%d %d", &a, &b);
+    str[5] = '?';
 
-    swap(&a, &b);
-
-    printf("%d %d",a ,b);
+    printf("%s", str);
 
     return 0;
 }
-
-// Modified on 2021.09.13
