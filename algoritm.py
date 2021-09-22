@@ -12,12 +12,6 @@ def len(a):
         n += 1
     return n
 
-#list()
-def list(a):
-    result = []
-    for i in a:
-        result.append(i)
-    return result
 
 #sort() only list
 def sort_list(a):
@@ -49,8 +43,6 @@ def abs(a):
     else:
         return a
 
-#max, min
-#sum
 
 #gcd 제귀함수 사용
 def GCD(a, b):
@@ -95,8 +87,26 @@ def Distingusih_of_Prime(num):
     for i in range(2, num + 1):
         if num % i:
             div = 1
-    if !(div):
+    if div == 0:
         print("Prime")
     div = 0
+
+# 숫자 반대로 - 1 // ex) 1234 -> 4321
+
+def reverse_int(num):
+    result = 0;
+    while num > 0:
+        result *= 10
+        check = num % 10
+        result += check
+        num /= 10
+
+# 숫자 추출, 숫자 반대로 하나 씩 출력
+
+def invert_num(num):
+    while num > 0:
+        one_num = num % 10
+        num /= 10
+        print(one_num,"\n")
 
 
