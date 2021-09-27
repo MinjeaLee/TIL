@@ -3,6 +3,7 @@
     "liveServer.settings.multiRootWorkspaceName": "vs_code",
     "files.associations": {
         "stdio.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "math.h": "c"
     }
 }
