@@ -18,8 +18,8 @@ char* strrev_1(char* str){
 
 int main(){
     int n, sum, over_check = 0, num_x, num_y;
-    char x[100000], y[100000];
-    char result[100000];
+    char x[690000], y[690000];
+    char result[690000];
 
     scanf("%d", &n);
     getchar();
