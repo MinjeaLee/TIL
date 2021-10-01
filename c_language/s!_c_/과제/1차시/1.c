@@ -25,32 +25,23 @@ char* strrev_1(char* str){
 
 int main(){
     int n, num, extra;
-    char print_num[2048], tmp;
-
 
     scanf("%d", &n);
+
     num = pow(n, 2);
     extra = num / 9;
     num += extra;
-    print_num[0] = '\0';
 
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < n - i - 1; j++){
-            printf(" ");
-        }
-        for(int j = 0; j < 2 * i + 1; j++){
+    printf("%d\n", num % 10);
+    for(int i = 1; i < n; i++){
+        for(int j = num - (2 * i + 1); j < num; j++){
             if(num % 10 == 0){
                 num--;
+                j--;
             }
-            tmp = (num % 10) + '0';
-            append(print_num, tmp);
-            num--;
+            printf("%d", j % 10);
         }
-        printf("%s", strrev_1(print_num));
-        if(i != n -1){
-            printf("\n");
-        }
-        print_num[0] = '\0';
+        printf("\n");
     }
 
     return 0;
