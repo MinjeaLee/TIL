@@ -6,8 +6,8 @@ int main(){
     int len_x, len_y, check, total = 0;
 
     gets(x);
-    scanf("%s", y);
-
+    gets(y);
+    
     len_x = strlen(x);
     len_y = strlen(y);
 

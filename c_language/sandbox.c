@@ -1,100 +1,90 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include <string.h>
 
-void merge(int low, int mid, int high);
-void mergeSort(int low, int high);
-void printArr(int a[], int n);
-void copyArray(int start, int end);
+int check(char *str, char *word);
 
-#define number 100000
-static int mergeArr1[number];
-static int mergeArr2[number];
+int main(){
+   char str[1001], *word[100], *p;
+   int k;
+   
+   gets(str);
+   scanf("%d", &k);
+   
+   p = strtok(str, " ");
+   
+   int n = 0;
+   while(p != NULL){
+      word[n] = p;      
+      n++;   
+      p = strtok(NULL, " ");
+   }
+   
+   char *temp;
+   for(int i=0; i<n-1; i++){
+      for(int j=0; j<n-1; j++){
+         if(strlen(word[j]) < strlen(word[j+1])){
+            temp = word[j];
+            word[j] = word[j+1];
+            word[j+1] = temp;
+         }
+         
+         else if(strlen(word[j]) == strlen(word[j+1])){
+            if(strcmp(word[j], word[j+1]) > 0){
+               temp = word[j];
+               word[j] = word[j+1];
+               word[j+1] = temp;
+            }
+         }
+      }      
+   }
+   
+   char *w = word[k-1];
+   puts(w);
 
-void mergeSort(int low, int high) {
-    int mid;
-    if(low < high) {
-        mid = (low + high)/2;
-        mergeSort(low, mid);
-        mergeSort(mid+1, high);
-        merge(low, mid, high);
-	}
+   for(int i = 0; i < n; i++){
+      if((strlen(*(word+i)) > strlen(w) + 1)) *(word+i) = "0";
+      else if (strlen(*(word+i)) < strlen(w) - 1) *(word+i) = "0";
+   }
+
+   int idx = 0, cnt;
+   char *print[100];
+    for(int i = 0; i < n; i++){
+        if(i == k - 1 || *(word+i) == "0") continue;
+        
+        cnt = check(w, *(word+i));
+        if(strlen(w) <= strlen(*(word+i))){
+           
+           if(strlen(*(word+i)) - 1 <= cnt && cnt <= strlen(*(word+i)) + 1){
+               print[idx] = *(word+i);
+               idx++;
+           }
+           else{
+              if(strlen(w) - 1 <= cnt && cnt <= strlen(*(word + i)) + 1){
+                  print[idx] = *(word + i);
+                   idx++;
+               }
+           }
+       }
+    }
+
+    for(int i = 0; i < idx; i++) printf("%s\n", *(print+i));
+
+   return 0;   
 }
 
-void merge(int low, int mid, int high) {
+int check(char *str, char *word){
+    char p;
+    int cnt = 0;
 
-    int i = low;
-    int j = mid+1;
-    int k = low;
-
-    while (i<=mid && j<=high) {
-        if(mergeArr2[i] < mergeArr2[j]) {
-           mergeArr1[k++] = mergeArr2[i++];
-        } else if(mergeArr2[i] >= mergeArr2[j]) {
-           mergeArr1[k++] = mergeArr2[j++];
+    for(int i = 0; i < strlen(word); i++){
+        p = *(word+i);
+        for(int j = 0; j < strlen(str); j++){
+            if(p == *(str+j)){
+                cnt++;
+                break;
+            }
         }
     }
-
- 
-
-    // 남은 영역 조사후 mergedArr으로 복사
-
-    if(i>=mid) {
-        while(j<=high) {
-           mergeArr1[k++] = mergeArr2[j++];
-        }
-    }
-
-    if(j>=high) {
-        while(i<=mid) {
-           mergeArr1[k++] = mergeArr2[i++];
-        }
-    }
-    copyArray(low, high);
-}
-
- 
-
-// 배열 출력 함수 
-
-void printArr(int a[], int n) {
-     int i;
-     for (i=0; i<n; i++) {
-        printf("%d ", a[i]);
-     }
-     printf("\n");
-}
-
- 
-
-void copyArray(int start, int end) {
-    int i;
-    for (i=start; i<=end; i++) {
-        mergeArr2[i] = mergeArr1[i];
-    }
-}
-
- 
-
-int main(int argc, char *argv[]) {
-
-	int i,n;
-	 
-    printf("몇개의 숫자로 정렬하시겠습니까?\n");
-    scanf("%d",&n);
-
-    for(i = 0 ; i < n ; i++)
-	mergeArr2[i]=rand()%1000;
-  
-    printf("정렬전 배열 : ");
-    printArr(mergeArr2,n);
-
-    mergeSort(0, n-1);
-
-	printf("정렬후 배열 : ");
-    printArr(mergeArr2,n); 
-
-    system("PAUSE");
-
-    return 0;
-
+    
+    return cnt;
 }
