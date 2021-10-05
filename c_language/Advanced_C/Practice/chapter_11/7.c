@@ -6,12 +6,28 @@ struct chart{
 
 int main(){
     struct chart st[10];
-    int index = 0, score;
 
-    for(int i = 0; i < 10; i++, index++){
+    for(int i = 0; i < 10; i++){
         scanf("%d", &st[i].score);
-        for(int j = 0; j < index; j++){
+        st[i].rangking = 1;
+    }
 
+    for(int i = 0; i < 10; i++){
+        for(int j = 0; j < 10; j++){
+            if(st[i].score < st[j].score){
+                st[i].rangking++;
+            }
+        }
+    }
+    for(int i = 0; i< 10; i++){
+        if(st[i].rangking == 3){
+            printf("%d", st[i].score);
+        }
+    }
+
+    for(int i = 0; i< 10; i++){
+        if(st[i].rangking == 7){
+            printf("%d", st[i].score);
         }
     }
 
