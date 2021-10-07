@@ -1,2 +1,2 @@
 
-    scanf("%s", word);
+        result = atoi(x) + atoi(y);

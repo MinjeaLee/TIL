@@ -12,6 +12,8 @@ char* strrev_1(char* str){
         endIdx --;
     }
     return str;
+
+    
 } 
 
 // 특정 문자 제거
@@ -26,3 +28,48 @@ void Eliminate(char *str, char ch)
         }
     }
 }
+
+
+// strtok
+char* strtok_2(char *str, char *std){
+    char* start_str = 0;
+    static char *tstr;
+    int i;
+    if(str != NULL){
+        start_str = str;
+    }
+    else{
+        start_str = tstr;
+    }
+    if(strlen(start_str) < 1){
+        return NULL;
+    }
+    for(i = 0; i < strlen(start_str); i++){
+        if(start_str[i] == (*std) || start_str[i] == '\0'){
+            start_str[i] = '\0';
+            break;
+        }
+    }
+    tstr = &start_str[i + 1];
+    return start_str;
+}
+
+// 버블 정렬
+void bubble_sort(int list[], int n){
+  int i, j, temp;
+
+  for(i=n-1; i>0; i--){
+    // 0 ~ (i-1)까지 반복
+    for(j=0; j<i; j++){
+      // j번째와 j+1번째의 요소가 크기 순이 아니면 교환
+      if(list[j]<list[j+1]){
+        temp = list[j];
+        list[j] = list[j+1];
+        list[j+1] = temp;
+      }
+    }
+  }
+}
+
+// 문자열 -> 단어 잘라 이중배열에 넣기
+void 
