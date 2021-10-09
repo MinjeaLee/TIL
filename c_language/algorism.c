@@ -72,4 +72,23 @@ void bubble_sort(int list[], int n){
 }
 
 // 문자열 -> 단어 잘라 이중배열에 넣기
-void 
+char *word_to_arry(char *str){
+    char word[50][50], string[101], *p;
+    int word_index_1d = 0, word_index_2d = 0;
+
+    for(p = string; *p != '\0'; p++){  
+        if(*p != ' ' && *p != '.'){             // 단어 끊을 조건 삽입
+            word[word_index_1d][word_index_2d] = *p;
+            word_index_2d++;
+        }
+        else{
+            if(*(p + 1) == ' '){
+                continue;
+            }
+            word[word_index_1d][word_index_2d] = '\0';
+            word_index_1d++;
+            word_index_2d = 0;
+        }
+    }           // 단어 개수는 word_index_1d + 1 해주어야함        
+    return word;
+}
