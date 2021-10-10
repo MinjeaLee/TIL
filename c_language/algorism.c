@@ -82,13 +82,16 @@ char *word_to_arry(char *str){
             word_index_2d++;
         }
         else{
-            if(*(p + 1) == ' '){
+            if(*(p + 1) == ' '){ // 마지막 인덱스인 경우 이 게 실행안된도록
                 continue;
             }
             word[word_index_1d][word_index_2d] = '\0';
             word_index_1d++;
             word_index_2d = 0;
         }
-    }           // 단어 개수는 word_index_1d + 1 해주어야함        
+    }   
+    if(){ // 만약 마지막 글자가 알파벳이면 
+        word_index_1d++; // ++ 
+    }    
     return word;
 }
