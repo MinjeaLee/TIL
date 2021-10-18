@@ -7,6 +7,8 @@ char* strrev_1(char* str){
     while(startIdx<endIdx) {
         char tmp = str[startIdx];
         str[startIdx] = str[endIdx];
+    
+    
         str[endIdx] = tmp;
         startIdx ++;
         endIdx --;
@@ -76,15 +78,12 @@ char *word_to_arry(char *str){
     char word[50][50], string[101], *p;
     int word_index_1d = 0, word_index_2d = 0;
 
-    for(p = string; *p != '\0'; p++){  
+    for(p = string; p < str + strlen(str); p++){  
         if(*p != ' ' && *p != '.'){             // 단어 끊을 조건 삽입
             word[word_index_1d][word_index_2d] = *p;
             word_index_2d++;
         }
         else{
-            if(*(p + 1) == ' '){ // 마지막 인덱스인 경우 이 게 실행안된도록
-                continue;
-            }
             word[word_index_1d][word_index_2d] = '\0';
             word_index_1d++;
             word_index_2d = 0;
@@ -94,4 +93,21 @@ char *word_to_arry(char *str){
         word_index_1d++; // ++ 
     }    
     return word;
+}
+
+
+// 문자열 삽입 함수
+void StringAdd(char arr[], char ch, int index) {
+    char* p;
+    int len;
+
+    len = strlen(arr);
+
+    for (p = arr + len; p > arr + index; p--){
+        *p = *(p - 1);
+    }
+
+    *(arr + index) = ch;
+
+    *(arr + strlen(arr)) = '\0';
 }
