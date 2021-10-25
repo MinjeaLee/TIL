@@ -1,21 +1,26 @@
-// strrev
-char* strrev_1(char* str){
-    int startIdx, endIdx;
-    if(!str || !*str)    return (char *)-1;
-    startIdx = 0;
-    endIdx = strlen(str)-1;
-    while(startIdx<endIdx) {
-        char tmp = str[startIdx];
-        str[startIdx] = str[endIdx];
-    
-    
-        str[endIdx] = tmp;
-        startIdx ++;
-        endIdx --;
-    }
-    return str;
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
+
+// strrev
+
+char* strrev_1(char* str){
+    int start, end;
+    char tmp;
+    if(!str || !*str)    return (char *) -1;
+    start = 0;
+    end = strlen(str)-1;
+    while(start<end) {
+        tmp = str[start];
+        str[start] = str[end];
     
+    
+        str[end] = tmp;
+        start ++;
+        end --;
+    }
+    return str;    
 } 
 
 // 특정 문자 제거
@@ -58,6 +63,7 @@ char* strtok_2(char *str, char *std){
 
 // 버블 정렬
 void bubble_sort(int list[], int n){
+
   int i, j, temp;
 
   for(i=n-1; i>0; i--){
@@ -106,7 +112,6 @@ void StringAdd(char arr[], char ch, int index) {
     for (p = arr + len; p > arr + index; p--){
         *p = *(p - 1);
     }
-
     *(arr + index) = ch;
 
     *(arr + strlen(arr)) = '\0';

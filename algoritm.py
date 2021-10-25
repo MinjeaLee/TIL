@@ -71,7 +71,7 @@ def gcd(a, b):
 # lcm(최소 공배수)
 def lcm(a, b):
     result = a * b / gcd(a,b)
-    return result;
+    return result
         
 
 # 소인수분해
@@ -94,7 +94,7 @@ def Distingusih_of_Prime(num):
 # 숫자 반대로 - 1 // ex) 1234 -> 4321
 
 def reverse_int(num):
-    result = 0;
+    result = 0
     while num > 0:
         result *= 10
         check = num % 10

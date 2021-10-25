@@ -7,6 +7,7 @@ typedef struct birth{
 
 }birth;
 
+
 void swap(struct birth *a, struct birth *b){
     struct birth tmp;
     tmp = *a;
@@ -16,6 +17,7 @@ void swap(struct birth *a, struct birth *b){
 
 int main(){
     int n;
+    char _name[100];
     birth list[100], *p, *q;
 
     scanf("%d", &n);

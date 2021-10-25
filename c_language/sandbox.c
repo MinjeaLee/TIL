@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <string.h>
+#pragma warning(disable:4996)
 
 int main(){
-    char *str = "a";
+    int num;
 
-//    scanf("%s", str);
+    scanf("%d", &num);
 
-    printf("%s\n", str);
+    printf("%d\n", num);
 
     return 0;
 }
