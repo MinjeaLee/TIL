@@ -1,13 +1,14 @@
+#pragma warning(disable:4996)
 #include <stdio.h>
 #include <string.h>
-#pragma warning(disable:4996)
+#include <stdlib.h>
 
 int main(){
-    int num;
+    printf("hello world");
 
-    scanf("%d", &num);
-
-    printf("%d\n", num);
+    printf("%d", a);
+    printf("%d", a);
+    printf("%d", a);
 
     return 0;
 }

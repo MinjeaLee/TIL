@@ -5,7 +5,8 @@
         "stdio.h": "c",
         "string.h": "c",
         "math.h": "c",
-        "2_2.C": "c"
+        "2_2.C": "c",
+        "stdlib.h": "c"
     },
     "C_Cpp.default.compilerPath": "C:\\mingw64\\bin\\gcc.exe",
     "miDebuggerPath": "C:\\mingw64\\bin\\g++.exe"
