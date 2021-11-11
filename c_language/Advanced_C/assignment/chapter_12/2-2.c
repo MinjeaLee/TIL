@@ -113,7 +113,7 @@ int main(){
     for(int i = 0; i < count_word_a; i++){
         for(int j = 0; j < count_word_b; j++){
             if(strcmp(word_a[i], word_b[j]) == 0){
-                result = realloc(result, sizeof(char *) * same_count + 1);
+                realloc(result, sizeof(char *) * same_count + 1);
                 if(result == NULL){
                     return -1;
                 }
@@ -138,12 +138,13 @@ int main(){
             else if (strlen(result[j]) == strlen(result[j + 1])){
                 if(strcmp(result[j], result[j + 1]) > 0){
                     tmp = result[j];
-                    result[j] = result[j+1];
+                    result[j] = result[j + 1];
                     result[j+1] = tmp;
                 }
             }
         }
     }
+
 
     for(int i = 0; i < same_count; i++){
         printf("%s\n", result[i]);
@@ -160,6 +161,7 @@ int main(){
     free(word_a);
     free(word_b);
     free(result);
+
 
     return 0;
 }
