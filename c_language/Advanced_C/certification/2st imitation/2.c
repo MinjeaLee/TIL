@@ -5,69 +5,81 @@
 #include <math.h>
 
 typedef struct complex{
-    double real, imaginary, abs;
-}complex;
+    double real, imag;
+    double abs;
+}cmp;
 
-struct complex add(complex x, complex y){
-    complex result;
-    double real, imaginary;
+void abs_val(struct complex *p1, struct complex *p2, struct complex *p3){
+    cmp max, min;
+    double max_abs = -1, min_abs = 999999999;
 
-    real = x.real + y.real;
-    imaginary = x.imaginary + y.imaginary;
 
-    result.real = real;
-    result.imaginary = imaginary;
+    p1->abs = sqrt(p1->real * p1->real + p1->imag * p1->imag);
+    p2->abs = sqrt(p2->real * p2->real + p2->imag * p2->imag);
+    p3->abs = sqrt(p3->real * p3->real + p3->imag * p3->imag);
+
+    if(p1->abs < min_abs){
+        min_abs = p1->abs;
+        min = *p1;
+    }
+    if(p2->abs < min_abs){
+        min_abs = p2->abs;
+        min = *p2;
+    }
+    if(p3->abs < min_abs){
+        min_abs = p3->abs;
+        min = *p3;
+    }
+    if(p1->abs > max_abs){
+        max_abs = p1->abs;
+        max = *p1;
+    }
+    if(p2->abs > max_abs){
+        max_abs = p2->abs;
+        max = *p2;
+    }
+    if(p3->abs > max_abs){
+        max_abs = p3->abs;
+        max = *p3;
+    }
+
+    *p1 = max;
+    *p2 = min;
+}
+
+cmp add(cmp p1, cmp p2){
+    cmp result;
+
+    result.real = p1.real + p2.real;
+    result.imag = p1.imag + p2.imag;
 
     return result;
 }
 
-struct complex sub(complex x, complex y){
-    complex result;
-    double real, imaginary;
+cmp sub(cmp p1, cmp p2){
+    cmp result;
 
-    real = x.real - y.real;
-    imaginary = x.imaginary - y.imaginary;
-
-    result.real = real;
-    result.imaginary = imaginary;
+    result.real = p1.real - p2.real;
+    result.imag = p1.imag - p2.imag;
 
     return result;
 }
 
-void abs_val(complex *p1, complex *p2, complex *p3){
-    complex *p, tmp;
-    double cal_abs, max =  -1, min = 999999999;
-
-    for(p = p3; p < p3 + 3; p++){
-        cal_abs = sqrt(p->real * p->real + p->imaginary * p->imaginary);
-        p->abs = cal_abs;
-    }
-    for(p = p3; p < p3 + 3; p++){
-        if(p->abs < min){
-            min = p->abs;
-            p2 = p;
-        }
-        if(p->abs > max){
-            max = p->abs;
-            p1 = p;
-        }
-    }
-}
 
 int main(){
-    complex list[3], *p, max, min, _add, _sub;
+    cmp x, y, z, add_result, sub_result;
 
-    for(p = list; p < list + 3; p++){
-        scanf("%lf %lf", &p->real, &p-> imaginary);
-    }
+    scanf("%lf %lf", &x.real, &x.imag);
+    scanf("%lf %lf", &y.real, &y.imag);
+    scanf("%lf %lf", &z.real, &z.imag);
 
-    abs_val(&max, &min, list);
+    abs_val(&x, &y, &z);
 
-    _add = add(max, min);
-    _sub = sub(max, min);
+    add_result = add(x, y);
+    sub_result = sub(x, y);
 
-    printf("%+.1lf%.1lf\n", _add.real, _add.imaginary);
-    printf("%+.1lf%.1lf\n", _sub.real, _sub.imaginary);
+    printf("%.1lf%+.1lfi\n", add_result.real, add_result.imag);
+    printf("%.1lf%+.1lfi", sub_result.real, sub_result.imag);
 
     return 0;
 }
