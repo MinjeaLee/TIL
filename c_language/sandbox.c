@@ -1,11 +1,9 @@
-#pragma warning(disable:4996)
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+void insert(char arr[], char ch, int index) {
+    char* p;
+    int len;
+    len = strlen(arr);
 
-int main(){
-
-    printf("%d", 7 * 6 / 10);
-
-    return 0;
-}
+    for (p = arr + len; p > arr + index; p--){
+        *p = *(p - 1);
+    }
+    *(arr + in

@@ -103,7 +103,7 @@ char *word_to_arry(char *str){
 
 
 // 문자열 삽입 함수
-void StringAdd(char arr[], char ch, int index) {
+void insert(char arr[], char ch, int index) {
     char* p;
     int len;
 
@@ -116,3 +116,55 @@ void StringAdd(char arr[], char ch, int index) {
 
     *(arr + strlen(arr)) = '\0';
 }
+
+// 문자열 치환
+
+// realloc 
+
+// 문자열 짜르기
+int str_to_word_return_word_count(char *str, char **word){
+    char *p;
+    int word_count = 0, len_word = 0, index_1d = 0, index_2d = 0;
+
+    for(p=str; *p != '\0'; p++){
+        if(*p == ' '){
+            word_count++;
+        }
+    }
+    word_count++;
+
+    word = (char **)realloc(word, sizeof(char *) * word_count);
+
+    for(p = str; *p != '\0'; p++){
+        if(*p != ' '){
+            len_word++;
+        }
+        else{
+            word[index_1d] = (char *)malloc(sizeof(char) * len_word + 1);
+            len_word = 0;
+            index_1d++;
+        }
+    }
+    word[index_1d] = (char *)malloc(sizeof(char) * len_word + 1);
+
+    index_1d = 0;
+
+    for(p = str; *p != '\0'; p++){
+        if(*p != ' '){
+            word[index_1d][index_2d++] = *p;
+        }
+        else{
+            word[index_1d][index_2d] = '\0';
+            index_1d++;
+            index_2d = 0;
+        }
+    }
+    word[index_1d][index_2d] = '\0';
+
+    return word_count;
+}
+
+// 같은 것 count
+
+// 단어 -> 문자열로
+
