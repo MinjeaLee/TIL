@@ -21,7 +21,7 @@ int main(){
             word_a[word_index_1d][word_index_2d++] = *p;
         }
         else{
-            word_a[word_index_1d][word_index_2d] = '\0';
+            // word_a[word_index_1d][word_index_2d] = '\0';
             a_word_count++;
             word_index_1d++;
             word_index_2d = 0;
@@ -38,14 +38,15 @@ int main(){
             word_b[word_index_1d][word_index_2d++] = *p;
         }
         else{
-            word_b[word_index_1d][word_index_2d] = '\0';
+            // word_b[word_index_1d][word_index_2d] = '\0';
             b_word_count++;
             word_index_1d++;
             word_index_2d = 0;
         }
     }
-    word_a[word_index_1d][word_index_2d] = '\0';
+    // word_b[word_index_1d][word_index_2d] = '\0';
     b_word_count++;
+
 
     for(int i = 0; i < a_word_count - 1; i++){
         for(int j = i + 1; j < a_word_count; j++){

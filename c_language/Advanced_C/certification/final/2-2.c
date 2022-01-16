@@ -3,23 +3,40 @@
 #include <string.h>
 #include <stdlib.h>
 
-typedef struct taxi_info{
+typedef struct taxi_info{ 
     char start[11];
     char target[11];
     double distance;
     int t_time;
-    char late_night;
-    int tot;
-
+    char late_night; 
+    int tot; 
 }TAXI;
 
+TAXI *sel_max(TAXI *p, int N, char *s, char *d){
+    TAXI *p_i, *result;
+    int maxtot = -1;
+
+    for(p_i = p; p_i < p + N; p_i++){
+        if(strcmp(s, p_i->start) == 0 && strcmp(d, p_i->target) == 0){
+            if(maxtot < p_i->tot){
+                maxtot = p_i->tot;
+                result = p_i;
+            }
+        }
+    }  
+    retu 
+    
+    
+}
+
 int main(){
-    TAXI list[20];
+    TAXI list[20], result;
+    char check_1[21], check_2[21];
     int n;
     int total;
     int pay;
-
-    scanf("%d", &n);
+    
+    scanf("%d" , &n);
     getchar();
 
     for(int i = 0; i < n; i++){
@@ -53,20 +70,10 @@ int main(){
         }
         list[i].tot = total;
     }
+    scanf("%s %s", check_1, check_2);
 
-    for(int i = 0; i < n; i++){
-        printf("%s %s %d\n", list[i].start, list[i].target, list[i].tot);
-    }
-
+    result = sel_max(list, n, check_1, check_2);
+    printf("")
 
     return 0;
 }
-
-
-// /*
-// 4 
-// aaa bbb 2 180 N
-// ccc ddd 2.25 135 Y
-// eee fff 5 0 Y
-// ggg hhh 7.5 60 N 
-// */

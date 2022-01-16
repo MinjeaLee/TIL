@@ -3,28 +3,29 @@
 #include <string.h>
 #include <stdlib.h>
 
-typedef struct student{
+struct student_info{
 
     char name[11];
     int first, second;
     double avg;
 
 
-}stu;
+};
 
-void insertData(stu *list, int N){
-    stu *p;
+void insertData(struct student_info*s, int N){
+    struct student_info *p;
 
-    for(p = list; p < list + N; p++){
+    for(p = s; p < s + N; p++){
         scanf("%s %d %d", p->name, &p->first, &p->second);
         getchar();
         p->avg = p->first * 0.4 + p->second * 0.6;
     }
 }
-double getAllavg(stu s[], int N){
-    stu *p, *max_stu;
+double getAllavg(struct student_info s[], int N){
+    struct student_info *p, *max_stu;
     double total = 0, avg;
     double max_avg = -1;
+    int count = 0;
     
 
     for(p = s; p < s + N; p++) {
@@ -35,14 +36,20 @@ double getAllavg(stu s[], int N){
         }  
     }
     avg = total / N;
-    printf("%.2lf\n", avg);
-    printf("first=%s %.2lf\n", max_stu->name, max_stu->avg);
+
+    for(p = s; p < s + N; p++) {
+        if(p->avg < avg){
+            count++;
+        }
+    }
+
+    printf("%.2lf %d\n", avg, count);
     
     return avg;
 }
 
-void printResult(stu *s, int N, double avg){
-    stu *p;
+void printResult(struct student_info*s, int N, double avg){
+    struct student_info *p;
 
     for(p = s; p < s + N; p++){
         if(p->avg <= avg){
@@ -52,7 +59,7 @@ void printResult(stu *s, int N, double avg){
 }
 
 int main(){
-    stu list[100];
+    struct student_info list[100];
     int n;
     double over_avg;
     

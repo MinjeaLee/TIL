@@ -6,7 +6,8 @@
         "string.h": "c",
         "math.h": "c",
         "2_2.C": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "기말고~1.C": "cpp"
     },
     "C_Cpp.default.compilerPath": "C:\\mingw64\\bin\\gcc.exe",
     "miDebuggerPath": "C:\\mingw64\\bin\\g++.exe"

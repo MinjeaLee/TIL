@@ -47,55 +47,56 @@ int str_to_word(char *str, char **word){
 
 
 int main(){
-    char str_a[101], str_b[101];
-    char **word_a,  **word_b;
-    char word_1[101], word_2[101];
-    int a_index, b_index;
-    char result[101];
-    int a_word_count, b_word_count;
-    
-    scanf("%d %d", &a_index, &b_index);
+    char str[101], max_str[101], min_str[101], result[101], word_1[101], word_2[101];
+    char **word_max, **word_min;
+    int n, m1, m2;
+    int max_len = -1, min_len = 101;
+    int str_len;
+    int word_min_count, word_max_count;
+
+    scanf("%d %d %d", &n, &m1, &m2);
     getchar();
+    for(int i = 0; i< n; i++){
+        gets(str);
+        str_len = strlen(str);
+        if(str_len > max_len){
+            max_len = str_len;
+            strcpy(max_str, str);
+        }
+        if(str_len < min_len){
+            min_len = str_len;
+            strcpy(min_str, str);
+        }
+    }
 
-    gets(str_a);
-    word_a = (char **)malloc(sizeof(char *));
-    a_word_count = str_to_word(str_a, word_a);
+    word_max = (char **) malloc(sizeof(char *));
+    word_max_count = str_to_word(max_str, word_max);
 
+    word_min = (char **) malloc(sizeof(char *));
+    word_min_count = str_to_word(min_str, word_min);
 
-    gets(str_b);
-    word_b = (char **)malloc(sizeof(char *));
-    b_word_count = str_to_word(str_b, word_b);
-
-    strcpy(word_1, word_a[a_index]);
-    strcpy(word_2, word_b[b_index]);
+    strcpy(word_1, word_max[m1]);
+    strcpy(word_2, word_min[m2]);
 
     if(strcmp(word_1, word_2) < 0){
         strcpy(result, word_1);
         strcat(result, word_2);
-    }  
+    }
     else{
         strcpy(result, word_2);
         strcat(result, word_1);
     }
+    printf("%s\n%s", max_str, min_str);
     printf("%s", result);
 
-    for(int i = 0; i <a_word_count; i++){
-        free(word_a[i]);
+    for(int i = 0; i < word_max_count; i++){
+        free(word_max[i]);
     }
-    for(int i = 0; i < b_word_count; i++){
-        free(word_b[i]);
+    for(int i = 0; i < word_min_count; i++){
+        free(word_min[i]);
     }
-    
-    free(word_a);
-    free(word_b);
-
+    free(word_max);
+    free(word_min);
 
     return 0;
 }
-
-
-/*
- 4
-book desk pencil paper
-orange apple banana lemon grape
-*/

@@ -18,21 +18,20 @@ int input(int *p){
 }
 
 int *sel_next(int *p){
-    int *p_arr;
-    int sum = 0;
-    for(p_arr = p;; p_arr++){
-        if(*p_arr == -1){
-            p_arr--;
-            break;
+    int *q;
+    int check = 0;
+
+    for(q = p; ;q++){
+        if(*q != *(q + 1)){
+            check = 1;
         }
-        sum += *p_arr;
-        if(sum > 10){
-            p_arr--;
+        if(check){
             break;
         }
     }
 
-    return p_arr;
+    return q;
+
 
 }
 int number(int *p, int *q){
