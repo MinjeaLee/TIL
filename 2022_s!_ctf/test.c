@@ -97,16 +97,25 @@ int change_front_or_back(int *x, int *y){
     y_back[2] = y_back[1];
     y_back[1] = tmp;
 
-    for(int i = 0; i < 4; i++){
-        diff_front += abs(x[i] - y_front[i]);
-        diff_back += abs(x[i] - y_back[i]);
-    }    
-    if(diff_front < diff_back){
+    if(*(x - 1) == y_front[0]){ 
+        result = 2;
+    }
+    else if(*(x + 1) == y_back[3]){
         result = 1;
     }
     else{
-        result = 2;
+        for(int i = 0; i < 4; i++){
+            diff_front += abs(x[i] - y_front[i]);
+            diff_back += abs(x[i] - y_back[i]);
+        }    
+        if(diff_front < diff_back){
+            result = 1;
+        }
+        else{
+            result = 2;
+        }
     }
+
     return result;
 }
 
@@ -166,11 +175,11 @@ int card_matching(int x[], int y[], int num_of_pair){
         same_num_pair_check(x, y, num_of_pair);
     }
 
-    printf("-----------------\n");
-    for(int i = 0; i < num_of_pair; i++){ 
-        printf("%d %d\n", *(x + i), *(y + i));
-    }
-
+    // printf("-----------------\n");
+    // for(int i = 0; i < num_of_pair; i++){ 
+    //     printf("%d %d\n", *(x + i), *(y + i));
+    // }
+    // printf("-----------------\n");
     result = cal_diff(x, y, num_of_pair);
 
     return result;
@@ -178,85 +187,58 @@ int card_matching(int x[], int y[], int num_of_pair){
 
 
 int main(){
-    // FILE *fp = fopen("./data/10.in", "r");
     int num_of_pair;
     int a[50000];
     int b[50000];
     // int result[50000]; // this array is used to store the result of difference between pairs at each case.
     int result;
-
     int total = 0;
 
-    scanf("%d", &num_of_pair);
+    char file_name[20];
+    char num[2] = {'1', '\0'};
 
-    for(int i = 0; i < num_of_pair; i++){
-        scanf("%d %d", (a + i), (b + i));
+    for(int i = 0; i <= 8; i++){
+        strcpy(file_name, "\0");
+        strcat(file_name, "./data/");
+        strcat(file_name, num);
+        strcat(file_name, ".in");
+
+        printf("%s\n", file_name);
+
+        FILE *fp = fopen(file_name, "r");
+        fscanf(fp, "%d", &num_of_pair);
+        
+        for(int j = 0; j < num_of_pair; j++){
+            fscanf(fp, "%d %d", &a[j], &b[j]);
+        }
+
+        total += card_matching(a, b, num_of_pair);
+
+        num[0]++;
+        fclose(fp);
     }
 
-    // result = card_matching(a, b, num_of_pair);
-
-    // FILE *fp = fopen("./data/1.in", "r");
-    // fscanf(fp, "%d", &num_of_pair);
-
-    // for(int i = 0; i < num_of_pair; i++){
-    //     fscanf(fp, "%d %d", (a + i), (b + i));
-    // }
-
-    result = card_matching(a, b, num_of_pair);
-
-    //!char file_name[20];
-    //!char num[2] = {'1', '\0'};
-    //!for(int i = 0; i <= 8; i++) {
-    //!    strcpy(file_name, "\0");
-    //!    strcat(file_name, "./data/");
-    //!    strcat(file_name, num);
-    //!    strcat(file_name, ".in");
-//!
-    //!    printf("%s\n", file_name);
-//!
-    //!    FILE *fp = fopen(file_name, "r");
-    //!    fscanf(fp, "%d", &num_of_pair);
-    //!    for(int i = 0; i < num_of_pair; i++){
-    //!        fscanf(fp, "%d %d", &a[i], &b[i]);
-    //!    }
-//!
-    //!    total += card_matching(a, b, num_of_pair);
-    //!    num[0]++;
-    //!    fclose(fp);
-    //!}
-//!
-    // fscanf(fp, "%d", &num_of_pair);
-    // // scanf("%d", &num_of_pair);
-
-    // for(int i = 0; i < num_of_pair; i++){
-    //     fscanf(fp, "%d %d", &a[i], &b[i]);
-    // }
-
-    // sort(a, num_of_pair);
-    // sort(b, num_of_pair);
-
-    // for(int i = 0; i < num_of_pair; i++){
-    //     same_num_pair_check(a, b, num_of_pair);
-    // }
-
+    FILE *fp = fopen("./data/10.in", "r");
     
-    // !printf("%d\n", total);
-    // !// result = cal_diff(a, b, num_of_pair);
-    // !int finalfile;
-    // !FILE *fp = fopen("./data/10.in", "in");
-    // !fscanf(fp, "%d", &num_of_pair);
-    // !for(int i = 0; i < num_of_pair; i++){
-    // !    fscanf(fp, "%d %d", &a[i], &b[i]);
-    // !}
-// !
-    // !finalfile = card_matching(a, b, num_of_pair);
-    // !printf("%d\n", finalfile);
-// !
-    // !total += finalfile;
-// !
-    // !printf("result = %d\n", total);
+    fscanf(fp, "%d", &num_of_pair);
 
-    printf("%d\n", result);
+    for(int j = 0; j < num_of_pair; j++){
+        fscanf(fp, "%d %d", &a[j], &b[j]);
+    }
+
+    total += card_matching(a, b, num_of_pair);
+
+    // scanf("%d", &num_of_pair);
+    
+    // for(int j = 0; j < num_of_pair; j++){
+    //     scanf("%d %d", &a[j], &b[j]);
+    // }
+
+    // total += card_matching(a, b, num_of_pair);
+
+    printf("%d\n", total);
+
+    fclose(fp);
 
     return 0;
 }

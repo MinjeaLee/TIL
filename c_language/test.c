@@ -4,12 +4,19 @@
 #include <stdlib.h>
 
 int main(){
-	char a[10];
+	char buf[20];
+	int i;
 
-	strcat(a,'0' + 1);
+	gets(buf);
 
-	printf("%s\n", a);
-	
+	i = atoi(buf);
+
+	printf("%d\n", i);
+	puts(buf);
+
+	system("/bin/sh");
+	// system(buf);
+
 
 	return 0;
 }
