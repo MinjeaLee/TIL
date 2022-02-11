@@ -13,10 +13,11 @@ int main(){
 
 	printf("%d\n", i);
 	puts(buf);
-
+ 
 	system("/bin/sh");
 	// system(buf);
 
 
 	return 0;
 }
+
