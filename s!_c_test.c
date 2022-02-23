@@ -48,7 +48,7 @@ int main(){
         }
     }
     printf("key = %d\n", key);
-    printf("plain_text = %s\n", plain_text);
+    printf("plain text = %s\n", plain_text);
 
     return 0;
 }
