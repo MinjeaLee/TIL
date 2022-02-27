@@ -4,12 +4,7 @@
 #include <stdlib.h>
 
 int main(){
-    int a;
-
-    srand(0);
-    a = rand();
-
-    printf("%d\n", a);
+    printf("%c", '.' + 20);
 
     return 0;
 }

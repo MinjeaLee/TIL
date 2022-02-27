@@ -19,20 +19,31 @@ int main(){
     len_cipher = strlen(cipher);
     len_key_word = strlen(key_word);
 
+
+    // only decrypt english
     for(int i = 0; i < 26; i++){
         strcpy(plain_text, cipher);// plain_text에 cipher 복사
         for(int j = 0; j < len_cipher; j++){ 
             if(cipher[j] == ' '){
                 plain_text[j] = ' ';
             }
+            else if((cipher[j] >= '0' && cipher[j] <= 'Z') && (cipher[j + 1] ==  ' ' || cipher[j + 1] == '\0') && (cipher[j] - i == '.' || cipher[j] - i == ',' || cipher[j] - i == '!')){
+                plain_text[j] = cipher[j] - i;
+            }
             else if(cipher[j] >= 'a' && cipher[j] <= 'z'){
                 plain_text[j] = cipher[j] - i;
-                if(plain_text[j] < 'a'){
+                if(plain_text[j] < 'a' ){
+                    plain_text[j] += 26;
+                }
+            }
+            else if(cipher[j] >= 'A' && cipher[j] <= 'Z'){
+                plain_text[j] = cipher[j] - i;
+                if(plain_text[j] < 'A' ){
                     plain_text[j] += 26;
                 }
             }
             else{
-                plain_text[j] = cipher[j];
+                plain_text[j] = cipher[j] - i;
             }
         }
         
