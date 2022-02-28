@@ -1,7 +1,6 @@
 <?php
     $conn =  mysqli_connect("localhost", "root", "111111", "web3");
 
-
     $sql_select = "select * from topic";
     $result = mysqli_query($conn, $sql_select);
     $list = '';
@@ -11,26 +10,29 @@
         // $list = $list."<li><a href=\"index.php?id={$result_row['id']}\">{$result_row['title']}</a></li>"
     }
 
-    $welcome_text = "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem, doloremque id assumenda non suscipit illo tenetur deserunt iusto dolore! Quo beatae laborum at assumenda tenetur quas eos eum molestias qui?";
-
     $description = array(
         'title' => "welcome",
-        'description' => $welcome_text
+        'description' => "Hello Web",
     );
 
     $modify_link = '';
     $delete_link = '';
 
+    $print_author = '';
+
     if(isset($_GET['id'])){
         $filtered_id = mysqli_real_escape_string($conn, $_GET['id']); // security, sql injection attack 
 
-        $sql_show_description = "select * from topic where id = {$filtered_id}"; // sql command
+        $sql_show_description = "select * from topic left join author on topic.author_id = author.id where topic.id = {$filtered_id}"; // sql command
         $result_description = mysqli_query($conn, $sql_show_description); // sql command apply
         $description_arr = mysqli_fetch_array($result_description); // result to arry
         $description = array(
             'title' => htmlspecialchars($description_arr['title']),
-            'description' =>  htmlspecialchars($description_arr['description'])
+            'description' =>  htmlspecialchars($description_arr['description']),
+            'name' =>  htmlspecialchars($description_arr['name'])
         );
+
+
         $modify_link = "<a href=\"modify.php?id={$_GET['id']}\">modify</a>";
         $delete_link = "
         <form action=\"process_delete.php\" method=\"POST\">
@@ -38,6 +40,7 @@
             <input type=\"submit\" value=\"delete\">
         </form>
         ";
+        $print_author = "<p>by {$description['name']}</p>";
     }
 ?>
 <!DOCTYPE html>
@@ -63,6 +66,8 @@
         echo "<h2>{$description['title']}</h2>";
         echo "<p>{$description['description']}</p>";
     ?>
+    <?=$print_author?>
+    
     
     
 </body>
