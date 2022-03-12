@@ -11,25 +11,15 @@ typedef struct _time{
 
 int main(){
     time t1, t2;
-    int hour_diff, min_diff, sec_diff;
+    int diff;
 
     scanf("%d %d %d", &t1.hour, &t1.min, &t1.sec);
     scanf("%d %d %d", &t2.hour, &t2.min, &t2.sec);
 
-    hour_diff = t2.hour - t1.hour;
-    min_diff = t2.min - t1.min;
-    sec_diff = t2.sec - t1.sec;
+    diff = (t2.hour - t1.hour) * 3600 + (t2.min - t1.min) * 60 + (t2.sec - t1.sec);
 
-    if(sec_diff < 0){
-        sec_diff += 60;
-        min_diff--;
-    }
-    if(min_diff < 0){
-        min_diff += 60;
-        hour_diff--;
-    }
-
-    printf("%d %d %d", hour_diff, min_diff, sec_diff);
+    printf("%d", diff);
 
     return 0;
 }
+

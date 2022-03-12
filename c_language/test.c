@@ -1,76 +1,76 @@
-#pragma warning(disable:4996)
+#pragma warning(disable : 4996)
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
-// make func add string to string
-char* add_string(char* str1, char* str2){
-    int len1 = strlen(str1);
-    int len2 = strlen(str2);
-    char* result = (char*)malloc(sizeof(char) * (len1 + len2 + 1));
-    strcpy(result, str1);
-    strcat(result, str2);
-    return result;
-}
+int main()
+{
+    char cipher[1000];
+    char plain_text[1000];
+    char key_word[20];
 
-// make func Dijkstra Algorithm
-int* Dijkstra(int** matrix, int len){
-    int* distance = (int*)malloc(sizeof(int) * len);
-    int* visited = (int*)malloc(sizeof(int) * len);
-    int* path = (int*)malloc(sizeof(int) * len);
-    int* result = (int*)malloc(sizeof(int) * len);
-    int min = 0;
-    int min_index = 0;
-    
-    for(int i = 0; i < len; i++){
-        distance[i] = matrix[0][i];
-        visited[i] = 0;
-        path[i] = 0;
-    }
-    visited[0] = 1;
-    for(int i = 0; i < len - 1; i++){
-        min = INT_MAX;
-        for(int j = 0; j < len; j++){
-            if(visited[j] == 0 && distance[j] < min){
-                min = distance[j];
-                min_index = j;
+    int len_cipher;
+    int len_key_word;
+    int flag = 0;
+    int key;
+
+    gets(cipher);
+    gets(key_word);
+
+    len_cipher = strlen(cipher);
+    len_key_word = strlen(key_word);
+
+    for (int i = 0; i < 26; i++)
+    {
+        strcpy(plain_text, cipher); 
+        for (int j = 0; j < len_cipher; j++)
+        {
+            if (cipher[j] == ' ')
+            {
+                plain_text[j] = ' ';
             }
-        }
-        visited[min_index] = 1;
-        for(int j = 0; j < len; j++){
-            if(visited[j] == 0 && matrix[min_index][j] != INT_MAX){
-                if(distance[j] > distance[min_index] + matrix[min_index][j]){
-                    distance[j] = distance[min_index] + matrix[min_index][j];
-                    path[j] = min_index;
+            else if ((cipher[j] >= '0' && cipher[j] <= 'Z') && (cipher[j + 1] == ' ' || cipher[j + 1] == '\0') && (cipher[j] - i == '.' || cipher[j] - i == ',' || cipher[j] - i == '!'))
+            {
+                plain_text[j] = cipher[j] - i;
+            }
+            else if (cipher[j] >= 'a' && cipher[j] <= 'z')
+            {
+                plain_text[j] = cipher[j] - i;
+                if (plain_text[j] < 'a')
+                {
+                    plain_text[j] += 26;
                 }
             }
+            else if (cipher[j] >= 'A' && cipher[j] <= 'Z')
+            {
+                plain_text[j] = cipher[j] - i;
+                if (plain_text[j] < 'A')
+                {
+                    plain_text[j] += 26;
+                }
+            }
+            else
+            {
+                plain_text[j] = cipher[j] - i;
+            }
+        }
+
+        // not use strstr()
+        for (int i = 0; i < len_cipher - len_key_word + 1; i++)
+        {
+            if (strncmp(plain_text + i, key_word, len_key_word) == 0)
+            {
+                flag = 1;
+            }
+        }
+        if (flag == 1)
+        {
+            key = i;
+            break;
         }
     }
-    result[0] = distance[len - 1];
-    result[1] = path[len - 1];
-    return result;
-}
-
-// make func get min of array
-int get_min(int* array, int len){
-    int min = array[0];
-    for(int i = 1; i < len; i++){
-        if(array[i] < min){
-            min = array[i];
-        }
-    }
-    return min;
-}
-
-// make func get max of array
-int get
-
-
-
-
-
-int main(){
-    
+    printf("key = %d\n", key);
+    printf("plain text = %s\n", plain_text);
 
     return 0;
 }
