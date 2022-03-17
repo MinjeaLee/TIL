@@ -3,10 +3,16 @@
 #include <string.h>
 #include <stdlib.h>
 
-int main(){
-    int a = 1234;
+// make func two num add
+int add(int a, int b)
+{
+   return a + b;
+}
 
-    printf("%30d\n", a);
+
+
+int main(){
+       
 
     return 0;
 }
