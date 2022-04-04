@@ -55,3 +55,40 @@ int main(){
 
     return 0;
 }
+
+/*
+3 abc
+abcabc abcabc
+ABCabc ABCabc
+abc abc abc abcd
+
+abcabc abcabc
+
+// 3 aaa
+aaaaaa aaa aaaa
+aaa aaa aaa
+aaaaa aaaaa aaaaa 
+
+aaaaaa aaa aaaa
+
+3 abc
+ab cab c abd
+ABCab cABC
+a bca bca bcd 
+
+NONE
+
+// 1 a
+AAAAAAAAAAa
+
+AAAAAAAAAAa
+
+3 AA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+ABBABAABABBABABABAABBABAABABBAABBABABABABAB
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWQAAA
+
+
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWQAAA
+
+*/ 
