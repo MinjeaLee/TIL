@@ -1,46 +1,56 @@
+#pragma warning(disable:4996)
 #include <stdio.h>
 #include <string.h>
-
-typedef struct location{
-    char *place;
-    char start_time[20];
-    char end_time[20];
-
-}location;
-
-typedef struct person{
-    char *name;
-    location *pl;
-    int pl_num;
-
-}person;
+#include <stdlib.h>
 
 int main(){
-    int n;
-    person infected[100], uninfected[100];
+    int result[201];
+    int tmp;
+    int num = 0;
 
-    scanf("%d", &n);    // ºñ°¨¿°ÀÚ
-    for(int i = 0; i < n; i++){
-        scanf("%s %d", &uninfected[i].name, &uninfected[i].pl_num);
-        getchar();
-        for(int j = 0; j < uninfected[i].pl_num; i++) {
-            scanf("%s %s/%s", &uninfected[i].pl->place, &uninfected[i].pl->start_time, &uninfected[i].pl->end_time);
-            getchar();
+    for(;;){
+        scanf("%d", &tmp);
+        if(tmp == -1) break;
+        result[num] = tmp;
+        num++;
+    }
+
+    for(;;) {
+        scanf("%d", &tmp);
+        if(tmp == -1) break;
+        result[num] = tmp;
+        num++;
+    }
+
+    for(int i = 0; i < num - 1; i++) {
+        for(int j = i + 1; j < num; j++) {
+            if(result[i] > result[j + 1]) {
+                tmp = result[i];
+                result[i] = result[j + 1];
+                result[j + 1] = tmp;
+            }
         }
     }
 
-    scanf("%d", &n);    // °¨¿°ÀÚ
-    for(int i = 0; i < n; i++){
-        scanf("%s %d", &infected[i].name, &infected[i].pl_num);
-        getchar();
-        for(int j = 0; j < infected[i].pl_num; i++) {
-            scanf("%s %s/%s", &infected[i].pl->place, &infected[i].pl->start_time, &infected[i].pl->end_time);
-            getchar();
+    num--;
+
+    for(int i = 0; i < num - 1; i++) {
+        if(result[i] == -1){
+            continue;
+        }
+        for(int j = i + 1; j < num; j++) {
+            if(result[i] == result[j]){
+                result[j] = -1;
+            }
         }
     }
- 
 
-
+    for(int i = 0; i < num; i++) {
+        if(result[i] == -1){
+            continue;
+        }
+        printf(" %d", result[i]);
+    }
 
     return 0;
 }

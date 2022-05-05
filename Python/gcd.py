@@ -7,7 +7,3 @@ def GCD(a, b):
         return b
     else:
         return GCD(b , a%b)
-
-a = int(input())
-for i in range(2,a+1):
-    
