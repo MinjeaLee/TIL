@@ -1,25 +1,27 @@
+#pragma warning(disable:4996)
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#pragma warning(disable:4996)
 
 int main(){
-    int n, *arr, sum = 0;
-
+    int n, d;
+    int *arr;
 
     scanf("%d", &n);
 
     arr = (int *)malloc(sizeof(int) * n);
 
-
     for(int i = 0; i < n; i++){
         scanf("%d", &arr[i]);
     }
-    for(int i = 0; i < n; i++) {
-        sum += arr[i];
+    scanf("%d", &d);
+    realloc(arr, (n - d) * sizeof(int));
+
+    for(int i = 0; i < n - d; i++){
+        printf("%d", arr[i]);
     }
-    printf("%d\n", sum);
     free(arr);
+
 
     return 0;
 }
